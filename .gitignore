@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
 *.pyo
-venv/
-.cerre7
+cerre7/
+.env
 db.sqlite3
