@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 
 class Tarefa(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255) #titulo da tarefa
     descricao = models.TextField(blank=True, null=True) #descrição da tarefa
     status = models.BooleanField(default=False) #status da tarefa - concluido ou não?
