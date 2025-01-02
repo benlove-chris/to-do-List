@@ -12,4 +12,4 @@ class Tarefa(models.Model):
     d_atualizacao = models.DateTimeField(auto_now=True) #a ultima atualização dela
 
     def __str__(self):
-        return self.title
+        return self.titulo
