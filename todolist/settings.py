@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-$7gb_vo2n9r(&3#$9wn2e(8x2a1q*q+d6r0)!2*9lbz$g#i!mc
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -40,9 +41,12 @@ INSTALLED_APPS = [
     'tarefas',
     'rest_framework',
     "rest_framework.authtoken",
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
