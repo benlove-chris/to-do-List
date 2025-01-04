@@ -6,7 +6,7 @@ const TarefaForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ titulo, descricao, concluida: false });
+    onSubmit({ titulo, descricao, status: false, usuario: 1 });
     setTitulo('');
     setDescricao('');
   };

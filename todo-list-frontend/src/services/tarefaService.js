@@ -7,7 +7,7 @@ const api = axios.create({
 export const getTarefas = async (token) => {
   try {
     const response = await api.get('tarefas/', {
-      headers: { Authorization: 'Token 4c62da4b4d7a476d8e413bfec9be5491dec29df3' },
+      headers: { Authorization: `Token ${token}` },
     });
     return response.data;
   } catch (error) {
@@ -21,9 +21,14 @@ export const getTarefas = async (token) => {
 };
 
 export const createTarefa = async (novaTarefa, token) => {
+
   try {
     const response = await api.post('tarefas/', novaTarefa, {
-      headers: { Authorization: `Token ${token}` },
+
+      headers: {
+        Authorization: 'Token 4c62da4b4d7a476d8e413bfec9be5491dec29df3',
+        'Content-Type': 'application/json'
+      },
     });
     return response.data;
   } catch (error) {
