@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
+//import './tarefaForm.css';
 
-const TarefaForm = ({ onSubmit }) => {
-  const [titulo, setTitulo] = useState('');
+const TarefaForm = ({ onAddTarefa }) => {
   const [descricao, setDescricao] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ titulo, descricao, status: false, usuario: 1 });
-    setTitulo('');
+    onAddTarefa(descricao);
     setDescricao('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="tarefa-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Título"
-        value={titulo}
-        onChange={(e) => setTitulo(e.target.value)}
-      />
-      <textarea
-        placeholder="Descrição"
+        placeholder="Digite uma nova tarefa"
         value={descricao}
         onChange={(e) => setDescricao(e.target.value)}
+        className="input-tarefa"
       />
-      <button type="submit">Adicionar Tarefa</button>
+      <button type="submit" className="add-button">
+        Adicionar
+      </button>
     </form>
   );
 };

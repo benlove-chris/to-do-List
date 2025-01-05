@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTarefas, createTarefa } from '../../services/tarefaService';
-import './Home.css'; // Importa os estilos
+import TarefaForm from '../tarefaForm/TarefaForm'; // Importa o componente TarefaForm
+import TarefaList from '../tarefaList/TarefaList'; // Importa o componente TarefaList
+import './Home.css';
 
 const Home = () => {
   const [tarefas, setTarefas] = useState([]);
-  const [descricao, setDescricao] = useState('');
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [modoConvidado, setModoConvidado] = useState(!token);
@@ -38,8 +39,7 @@ const Home = () => {
     }
   };
 
-  const handleAddTarefa = async (e) => {
-    e.preventDefault();
+  const handleAddTarefa = async (descricao) => {
     if (!descricao.trim()) return;
 
     if (modoConvidado) {
@@ -54,12 +54,11 @@ const Home = () => {
         console.error('Erro ao criar tarefa:', error);
       }
     }
-    setDescricao('');
   };
 
   const handleLogin = () => {
     if (!token) {
-      navigate('/login'); // Redireciona para a página de login
+      navigate('/login');
     } else {
       const mockToken = 'mock-token-de-login';
       localStorage.setItem('token', mockToken);
@@ -75,7 +74,7 @@ const Home = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setModoConvidado(true);
-    navigate('/'); // Redireciona para a home
+    navigate('/');
   };
 
   return (
@@ -95,27 +94,8 @@ const Home = () => {
           Logout
         </button>
       )}
-      <form className="tarefa-form" onSubmit={handleAddTarefa}>
-        <input
-          type="text"
-          placeholder="Digite uma nova tarefa"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-          className="input-tarefa"
-        />
-        <button type="submit" className="add-button">
-          Adicionar
-        </button>
-      </form>
-      <div className="tarefas-list">
-        <ul>
-          {tarefas.map((tarefa, index) => (
-            <li key={index} className="tarefa-item">
-              {tarefa.descricao}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <TarefaForm onAddTarefa={handleAddTarefa} />
+      <TarefaList tarefas={tarefas} /> {/* Usando o componente TarefaList */}
     </div>
   );
 };

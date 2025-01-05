@@ -1,0 +1,24 @@
+.tarefas-list {
+  margin-top: 20px;
+}
+
+.tarefas-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tarefa-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.tarefa-item:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
