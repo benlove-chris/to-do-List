@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginForm.css'; // Importa o arquivo CSS
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -12,38 +13,30 @@ const LoginForm = () => {
       localStorage.setItem('token', '4c62da4b4d7a476d8e413bfec9be5491dec29df3');
       window.location.href = '/'; // Redireciona para a página de tarefas
     } else {
-      // Se as credenciais não forem válidas, redireciona para a página de criação de conta
       alert('Credenciais inválidas. Você será redirecionado para criar uma conta.');
       window.location.href = '/signup'; // Caminho para a página de criação de conta
     }
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)', backgroundColor: '#fff' }}>
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '10px' }}>
-          <input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '10px', fontSize: '16px', marginBottom: '10px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <input
-            type="password"
-            placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            style={{ width: '100%', padding: '10px', fontSize: '16px', marginBottom: '20px' }}
-          />
-        </div>
-        <button type="submit" style={{ width: '100%', padding: '10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>
-          Entrar
-        </button>
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+        />
+        <button type="submit">Entrar</button>
       </form>
+      <a href="/signup">Ainda não tem conta? Crie uma agora</a>
     </div>
   );
 };
