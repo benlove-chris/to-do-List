@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getTarefas, createTarefa } from '../../services/tarefaService';
+import './Home.css'; // Importa os estilos
 
 const Home = () => {
   const [tarefas, setTarefas] = useState([]);
   const [descricao, setDescricao] = useState('');
+  const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [modoConvidado, setModoConvidado] = useState(!token);
 
@@ -27,10 +30,9 @@ const Home = () => {
   const sincronizarTarefas = async (tarefasLocais) => {
     try {
       for (const tarefa of tarefasLocais) {
-        await createTarefa(tarefa, token); // Cria as tarefas locais no servidor
+        await createTarefa(tarefa, token);
       }
-      console.log('Tarefas locais sincronizadas com o servidor.');
-      localStorage.removeItem('tarefas'); // Limpa as tarefas locais após sincronização
+      localStorage.removeItem('tarefas');
     } catch (error) {
       console.error('Erro ao sincronizar tarefas locais:', error);
     }
@@ -56,57 +58,59 @@ const Home = () => {
   };
 
   const handleLogin = () => {
-    const mockToken = 'mock-token-de-login';
-    localStorage.setItem('token', mockToken);
-    setModoConvidado(false);
+    if (!token) {
+      navigate('/login'); // Redireciona para a página de login
+    } else {
+      const mockToken = 'mock-token-de-login';
+      localStorage.setItem('token', mockToken);
+      setModoConvidado(false);
 
-    const tarefasLocais = JSON.parse(localStorage.getItem('tarefas') || '[]');
-    if (tarefasLocais.length > 0) {
-      sincronizarTarefas(tarefasLocais);
+      const tarefasLocais = JSON.parse(localStorage.getItem('tarefas') || '[]');
+      if (tarefasLocais.length > 0) {
+        sincronizarTarefas(tarefasLocais);
+      }
     }
-
-    window.location.reload(); // Atualiza para refletir o login
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setModoConvidado(true);
-    window.location.reload();
+    navigate('/'); // Redireciona para a home
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f9f9f9', fontFamily: "'Arial', sans-serif", padding: '20px' }}>
-      <h1>Lista de Tarefas</h1>
+    <div className="home-container">
+      <h1>Lista de Tarefas - Home</h1>
       {modoConvidado && (
-        <p style={{ color: '#d9534f', marginBottom: '20px', fontSize: '14px' }}>
+        <p className="modo-convidado">
           Você está no modo convidado. Suas tarefas serão salvas apenas localmente.
         </p>
       )}
       {!token ? (
-        <button style={{ padding: '10px 20px', margin: '10px', fontSize: '16px', color: '#fff', backgroundColor: '#007bff', border: 'none', borderRadius: '5px', cursor: 'pointer' }} onClick={handleLogin}>
+        <button className="login-button" onClick={handleLogin}>
           Fazer login para salvar tarefas no servidor
         </button>
       ) : (
-        <button style={{ padding: '10px 20px', margin: '10px', fontSize: '16px', color: '#fff', backgroundColor: '#dc3545', border: 'none', borderRadius: '5px', cursor: 'pointer' }} onClick={handleLogout}>
+        <button className="logout-button" onClick={handleLogout}>
           Logout
         </button>
       )}
-      <form style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }} onSubmit={handleAddTarefa}>
+      <form className="tarefa-form" onSubmit={handleAddTarefa}>
         <input
           type="text"
           placeholder="Digite uma nova tarefa"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
-          style={{ padding: '10px', fontSize: '16px', width: '70%', border: '1px solid #ccc', borderRadius: '5px', outline: 'none', marginRight: '10px' }}
+          className="input-tarefa"
         />
-        <button type="submit" style={{ padding: '10px 20px', margin: '10px', fontSize: '16px', color: '#fff', backgroundColor: '#007bff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+        <button type="submit" className="add-button">
           Adicionar
         </button>
       </form>
-      <div style={{ width: '100%', maxWidth: '600px', marginTop: '20px' }}>
+      <div className="tarefas-list">
         <ul>
           {tarefas.map((tarefa, index) => (
-            <li key={index} style={{ marginBottom: '10px' }}>
+            <li key={index} className="tarefa-item">
               {tarefa.descricao}
             </li>
           ))}

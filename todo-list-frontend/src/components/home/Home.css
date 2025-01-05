@@ -1,0 +1,105 @@
+/* home.css */
+
+/* Estilização principal do container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+/* Título */
+.home-container h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Mensagem do modo convidado */
+.modo-convidado {
+  color: #d9534f;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Botões de login e logout */
+.login-button, .logout-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button {
+  background-color: #dc3545;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button:hover {
+  background-color: #b02a37;
+}
+
+/* Formulário de nova tarefa */
+.tarefa-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.input-tarefa {
+  padding: 10px;
+  font-size: 16px;
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  margin-right: 10px;
+}
+
+.add-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+/* Lista de tarefas */
+.tarefas-list {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.tarefas-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tarefa-item {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

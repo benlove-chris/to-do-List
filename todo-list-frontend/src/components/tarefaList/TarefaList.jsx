@@ -21,7 +21,7 @@ function Tarefas() {
 
   return (
     <div>
-      <h1>Lista de Tarefas</h1>
+      <h1>Lista de d Tarefas</h1>
       {error && <p>{error}</p>}
       <ul>
         {tarefas.map((tarefa) => (

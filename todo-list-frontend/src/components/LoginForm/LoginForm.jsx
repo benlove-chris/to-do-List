@@ -9,7 +9,7 @@ const LoginForm = () => {
     // Simulação de validação de login
     if (email === 'usuario@teste.com' && senha === 'senha123') {
       // Armazenar o token no localStorage
-      localStorage.setItem('token', 'mock-token-de-login');
+      localStorage.setItem('token', '4c62da4b4d7a476d8e413bfec9be5491dec29df3');
       window.location.href = '/'; // Redireciona para a página de tarefas
     } else {
       // Se as credenciais não forem válidas, redireciona para a página de criação de conta
