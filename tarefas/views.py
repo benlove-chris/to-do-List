@@ -23,3 +23,5 @@ class TarefaViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         # Define o usuário autenticado como dono da tarefa ao criá-la
         serializer.save(usuario=self.request.user)
+    
+    
