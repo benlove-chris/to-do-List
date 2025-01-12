@@ -92,7 +92,7 @@ const Home = ({ tema, mudarTema }) => {
           ></div>
         </div>
         <h1 id="title" className={tema === "darker" ? "darker-title" : ""}>
-          Just do it.
+          let's start.
           <div id="border"></div>
         </h1>
       </div>
