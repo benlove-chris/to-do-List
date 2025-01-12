@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getTarefas, createTarefa } from '../../services/tarefaService';
-import TarefaForm from '../tarefaForm/TarefaForm'; // Importa o componente TarefaForm
-import TarefaList from '../tarefaList/TarefaList'; // Importa o componente TarefaList
-import './Home.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getTarefas, createTarefa } from "../../services/tarefaService";
+import TarefaForm from "../tarefaForm/TarefaForm";
+import TarefaList from "../tarefaList/TarefaList";
+import "./Home.css";
 
-const Home = () => {
+const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [modoConvidado, setModoConvidado] = useState(!token);
 
   useEffect(() => {
@@ -18,56 +18,53 @@ const Home = () => {
           const tarefasAPI = await getTarefas(token);
           setTarefas(tarefasAPI);
         } catch (error) {
-          console.error('Erro ao buscar tarefas:', error);
+          console.error("Erro ao buscar tarefas:", error);
         }
       };
       fetchTarefas();
     } else {
-      const tarefasLocal = JSON.parse(localStorage.getItem('tarefas') || '[]');
+      const tarefasLocal = JSON.parse(localStorage.getItem("tarefas") || "[]");
       setTarefas(tarefasLocal);
     }
   }, [token]);
-
-  const sincronizarTarefas = async (tarefasLocais) => {
-    try {
-      for (const tarefa of tarefasLocais) {
-        await createTarefa(tarefa, token);
-      }
-      localStorage.removeItem('tarefas');
-    } catch (error) {
-      console.error('Erro ao sincronizar tarefas locais:', error);
-    }
-  };
 
   const handleAddTarefa = async (descricao) => {
     if (!descricao.trim()) return;
 
     if (modoConvidado) {
-      const novasTarefas = [...tarefas, { descricao }];
+      const novasTarefas = [...tarefas, { descricao, concluida: false }];
       setTarefas(novasTarefas);
-      localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
+      localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
     } else {
       try {
         const tarefaCriada = await createTarefa({ descricao }, token);
         setTarefas([...tarefas, tarefaCriada]);
       } catch (error) {
-        console.error('Erro ao criar tarefa:', error);
+        console.error("Erro ao criar tarefa:", error);
       }
+    }
+  };
+
+  const handleConcluirTarefa = (index) => {
+    const novasTarefas = [...tarefas];
+    novasTarefas[index].concluida = !novasTarefas[index].concluida;
+    setTarefas(novasTarefas);
+    if (modoConvidado) {
+      localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
+    }
+  };
+
+  const handleExcluirTarefa = (index) => {
+    const novasTarefas = tarefas.filter((_, i) => i !== index);
+    setTarefas(novasTarefas);
+    if (modoConvidado) {
+      localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
     }
   };
 
   const handleLogin = () => {
     if (!token) {
       navigate('/login');
-    } else {
-      const mockToken = 'mock-token-de-login';
-      localStorage.setItem('token', mockToken);
-      setModoConvidado(false);
-
-      const tarefasLocais = JSON.parse(localStorage.getItem('tarefas') || '[]');
-      if (tarefasLocais.length > 0) {
-        sincronizarTarefas(tarefasLocais);
-      }
     }
   };
 
@@ -78,8 +75,29 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container">
-      <h1>Lista de Tarefas - Home</h1>
+    <div className={`home-container ${tema}`}>
+      <div id="header">
+        <div className="flexrow-container">
+          <div
+            className="standard-theme theme-selector"
+            onClick={() => mudarTema("standard")}
+          ></div>
+          <div
+            className="light-theme theme-selector"
+            onClick={() => mudarTema("light")}
+          ></div>
+          <div
+            className="darker-theme theme-selector"
+            onClick={() => mudarTema("darker")}
+          ></div>
+        </div>
+        <h1 id="title" className={tema === "darker" ? "darker-title" : ""}>
+          Just do it.
+          <div id="border"></div>
+        </h1>
+      </div>
+      <div id="tarefaConteudo">
+
       {modoConvidado && (
         <p className="modo-convidado">
           Você está no modo convidado. Suas tarefas serão salvas apenas localmente.
@@ -95,7 +113,13 @@ const Home = () => {
         </button>
       )}
       <TarefaForm onAddTarefa={handleAddTarefa} />
-      <TarefaList tarefas={tarefas} /> {/* Usando o componente TarefaList */}
+      <TarefaList
+        tarefas={tarefas}
+        onConcluir={handleConcluirTarefa}
+        onExcluir={handleExcluirTarefa}
+      />
+    
+    </div>
     </div>
   );
 };

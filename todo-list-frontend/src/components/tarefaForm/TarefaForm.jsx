@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import './tarefaForm.css';
+import './TarefaForm.css';
 
 const TarefaForm = ({ onAddTarefa }) => {
   const [descricao, setDescricao] = useState('');

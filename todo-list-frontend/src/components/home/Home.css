@@ -1,105 +1,129 @@
-/* home.css */
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Estilização principal do container */
-.home-container {
+body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f9f9f9;
-  font-family: 'Arial', sans-serif;
-  padding: 20px;
-}
-
-/* Título */
-.home-container h1 {
-  font-size: 2rem;
-  color: #333;
-}
-
-/* Mensagem do modo convidado */
-.modo-convidado {
-  color: #d9534f;
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-/* Botões de login e logout */
-.login-button, .logout-button {
-  padding: 10px 20px;
-  margin: 10px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logout-button {
-  background-color: #dc3545;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
-}
-
-.logout-button:hover {
-  background-color: #b02a37;
-}
-
-/* Formulário de nova tarefa */
-.tarefa-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.input-tarefa {
-  padding: 10px;
-  font-size: 16px;
-  width: 70%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  margin-right: 10px;
-}
-
-.add-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #28a745;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.add-button:hover {
-  background-color: #218838;
-}
-
-/* Lista de tarefas */
-.tarefas-list {
+  font-family: "Sofia", sans-serif;
+  min-height: 100vh;   
   width: 100%;
-  max-width: 600px;
-  margin-top: 20px;
 }
 
-.tarefas-list ul {
-  list-style: none;
-  padding: 0;
+/* Estilos dos temas */
+.standard {
+  background-image: linear-gradient(100deg, #575656, #062e3f);
+  color: #ffdfdb;
+  transition: 0.3s linear;
+  overflow: hidden;
 }
 
-.tarefa-item {
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.light {
+  background-image: linear-gradient(100deg, #d4f1ff, #ffffff);
+  color: #1a150e;
+  transition: 0.3s linear;
+}
+
+.darker {
+  background-image: linear-gradient(100deg, #001214, #001f29);
+  color: white;
+  transition: 0.3s linear;
+}
+
+#header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 3rem;
+  min-height: 25vh;
+  width: 100%;
+}
+
+/* Botões de seleção de tema */
+.flexrow-container {
+  align-items: center;
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 3%;
+}
+
+.theme-selector {
+  border: 1px solid #d1dae3;
+  border-radius: 100%;
+  height: 35px;
+  margin: 0 8px;
+  transition: transform 150ms ease-in-out, box-shadow 200ms ease-in-out;
+  width: 35px;
+}
+
+.theme-selector:hover { 
+  box-shadow: white 0 0 8px;
+  cursor: pointer;
+}
+
+.theme-selector:active {
+  transform: scale(0.95);
+}
+
+.standard-theme {
+  background-image: linear-gradient(100deg, #575656, #062e3f);
+}
+
+.light-theme {
+  background-image: linear-gradient(100deg, #d4f1ff, #ffffff);
+}
+
+.darker-theme {
+  background-image: linear-gradient(100deg, #001214, #001f29);
+}
+
+/* Animação do título */
+#title {
+  border-right: solid 3px rgba(0, 0, 0, 0.75);
+  white-space: pre;
+  overflow: hidden;
+  letter-spacing: 0.20rem;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  max-width: 480px;
+}
+
+/* Animação padrão */
+#title {
+  animation: animated-text 2s steps(11, end) 0.5s 1 normal both, 
+             animated-cursor 750ms steps(11, end) infinite;
+}
+
+#title.darker-title {
+  animation: animated-text 2s steps(11, end) 0.5s 1 normal both, 
+             darker-animated-cursor 750ms steps(11, end) infinite;
+}
+
+/* Animação do texto */
+@keyframes animated-text {
+  from { width: 0%; }
+  to { width: 480px; }
+}
+
+/* Animação do cursor */
+@keyframes animated-cursor {
+  from { border-right-color: rgba(0, 0, 0, 0.75); }
+  to { border-right-color: transparent; }
+}
+
+@keyframes darker-animated-cursor {
+  from { border-right-color: #01394c; }
+  to { border-right-color: transparent; }
+}
+
+#tarefaConteudo p{
+
+    
+    align-items: center;
+    
 }
