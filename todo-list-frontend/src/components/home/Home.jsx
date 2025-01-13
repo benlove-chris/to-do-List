@@ -61,6 +61,17 @@ const Home = ({ tema, mudarTema }) => {
       localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
     }
   };
+  
+  const handleEditarTarefa = (index, novaDescricao) => {
+  const novasTarefas = [...tarefas];
+  novasTarefas[index].descricao = novaDescricao; // Atualiza a descrição
+  setTarefas(novasTarefas);
+
+  if (modoConvidado) {
+    localStorage.setItem('tarefas', JSON.stringify(novasTarefas)); // Atualiza no localStorage
+  }
+};
+
 
   const handleLogin = () => {
     if (!token) {
@@ -73,6 +84,7 @@ const Home = ({ tema, mudarTema }) => {
     setModoConvidado(true);
     navigate('/');
   };
+
 
   return (
     <div className={`home-container ${tema}`}>
@@ -117,6 +129,7 @@ const Home = ({ tema, mudarTema }) => {
         tarefas={tarefas}
         onConcluir={handleConcluirTarefa}
         onExcluir={handleExcluirTarefa}
+        onEditar={handleEditarTarefa}
       />
     
     </div>

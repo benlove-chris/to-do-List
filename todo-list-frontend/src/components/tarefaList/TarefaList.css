@@ -68,6 +68,48 @@
 }
 
 
+/* Estilo do campo de entrada para edição */
+.tarefa-input {
+  flex: 1;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Botão salvar */
+.salvar-button {
+  background-color: #28a745; /* Verde */
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.salvar-button:hover {
+  background-color: #218838;
+}
+
+/* Botão cancelar */
+.cancelar-button {
+  background-color: #6c757d; /* Cinza */
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelar-button:hover {
+  background-color: #5a6268;
+}
+
+
+
 /* Ajuste para centralizar a lista de tarefas */
 .tarefa-list {
   margin: 20px auto; /* Espaço acima e abaixo */
