@@ -1,16 +1,6 @@
-/* Estilo do header */
-.home-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 2px solid #ddd;
-}
 
-.home-header h1 {
-  margin: 0;
-  font-size: 28px;
-}
+
+
 
 /* Lista de tarefas */
 .tarefa-list {
@@ -39,31 +29,44 @@
   gap: 10px;
 }
 
-.concluir-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+/* Estilo do checkbox para concluir a tarefa */
+.concluir-checkbox {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
 }
 
-.concluir-button:hover {
-  background-color: #45a049;
+/* Estilo do botão editar */
+.editar-button {
+  background-color: #ffc107; /* Amarelo */
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+.editar-button:hover {
+  background-color: #e0a800;
+}
+
+/* Estilo do botão excluir */
 .excluir-button {
-  background-color: #f44336;
-  color: white;
+  background-color: #dc3545; /* Vermelho */
   border: none;
-  padding: 5px 10px;
   border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .excluir-button:hover {
-  background-color: #d32f2f;
+  background-color: #b02a37;
 }
+
 
 /* Ajuste para centralizar a lista de tarefas */
 .tarefa-list {
@@ -74,19 +77,38 @@
 }
 
 /* Estilo dos itens da tarefa */
+/* Estilos padrão */
 .tarefa-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
   border-radius: 5px;
   margin: 10px auto; /* Espaçamento entre itens */
-  background-color: #f9f9f9;
   width: 100%; /* Garante que o item ocupe toda a largura disponível */
   max-width: 500px; /* Define uma largura máxima para manter o design responsivo */
   transition: background-color 0.3s;
 }
+
+/* Cor de fundo para o tema padrão */
+.standard .tarefa-item {
+  background-color: rgb(26, 27, 27);
+  color: #ffdfdb; /* Texto no tema padrão */
+}
+
+/* Cor de fundo para o tema claro */
+.light .tarefa-item {
+  background-color:#AEB1B4;
+  color: #1a150e; /* Texto no tema claro */
+}
+
+/* Cor de fundo para o tema escuro */
+.darker .tarefa-item {
+  background-color: #01394c;
+  color: #ffffff; /* Texto no tema escuro */
+}
+
 
 /* Estilo para o contêiner geral */
 .home-container {

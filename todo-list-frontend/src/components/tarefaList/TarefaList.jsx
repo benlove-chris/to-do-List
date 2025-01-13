@@ -10,13 +10,21 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir }) => {
           key={index}
           className={`tarefa-item ${tarefa.concluida ? 'concluida' : ''}`}
         >
+          {/* Checkbox para concluir a tarefa */}
+          <input
+            type="checkbox"
+            checked={tarefa.concluida}
+            onChange={() => onConcluir(index)}
+            className="concluir-checkbox"
+          />
           <span>{tarefa.descricao}</span>
           <div className="tarefa-buttons">
+            {/* Botão renomeado para Editar */}
             <button
-              className="concluir-button"
-              onClick={() => onConcluir(index)}
+              className="editar-button"
+              onClick={() => console.log(`Editar tarefa ${index}`)}
             >
-              {tarefa.concluida ? 'Desfazer' : 'Concluir'}
+              Editar
             </button>
             <button
               className="excluir-button"

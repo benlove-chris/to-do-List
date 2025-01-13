@@ -1,4 +1,6 @@
 /* Reset básico */
+
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +18,7 @@ body {
 /* Estilos dos temas */
 .standard {
   background-image: linear-gradient(100deg, #575656, #062e3f);
-  color: #ffdfdb;
+  color:red; /*color: #ffdfdb;*/
   transition: 0.3s linear;
   
 }
@@ -168,8 +170,3 @@ body {
 
 
 
-/* Input themes */
-form input.standard-input {
-    background-color: darkred;
-    color: red;
-}
