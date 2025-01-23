@@ -102,7 +102,13 @@ const Home = ({ tema, mudarTema }) => {
             className="darker-theme theme-selector"
             onClick={() => mudarTema("darker")}
           ></div>
+          {!token && (
+            <button className="login-button" onClick={handleLogin}>
+              Fazer login
+            </button>
+          )}
         </div>
+
         <h1 id="title" className={tema === "darker" ? "darker-title" : ""}>
           let's start.
           <div id="border"></div>
