@@ -4,6 +4,8 @@ import { getTarefas, createTarefa } from "../../services/tarefaService";
 import TarefaForm from "../tarefaForm/TarefaForm";
 import TarefaList from "../tarefaList/TarefaList";
 import "./Home.css";
+import userImage from './user.png';
+
 
 const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
@@ -102,11 +104,11 @@ const Home = ({ tema, mudarTema }) => {
             className="darker-theme theme-selector"
             onClick={() => mudarTema("darker")}
           ></div>
-          {!token && (
-            <button className="login-button" onClick={handleLogin}>
-              Fazer login
-            </button>
-          )}
+          <div >
+            {!token && (
+              <img src={userImage} alt="User Icon" className="icon"/>
+            )}
+          </div>
         </div>
 
         <h1 id="title" className={tema === "darker" ? "darker-title" : ""}>
