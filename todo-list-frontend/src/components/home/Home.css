@@ -18,7 +18,7 @@ body {
 /* Estilos dos temas */
 .standard {
   background-image: linear-gradient(100deg, #575656, #062e3f);
-  color:red; /*color: #ffdfdb;*/
+  color: #ffdfdb;
   transition: 0.3s linear;
   
 }
@@ -43,6 +43,32 @@ body {
   font-size: 3rem;
   min-height: 25vh;
   width: 100%;
+}
+
+/*icone */
+.left-section {
+  position: absolute; /* Posiciona o ícone na borda esquerda */
+  left: 0;
+  display: flex;
+  align-items: center;
+  margin: 0 50px;
+  font-size: 20px;
+}
+
+.login-button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.login-button i {
+  margin-right: 5px; /* Espaçamento entre o ícone e o texto */
 }
 
 /* Botões de seleção de tema */
@@ -84,11 +110,7 @@ body {
   background-image: linear-gradient(100deg, #001214, #001f29);
 }
 
-/*icone */
-.icon{
-   width: 10%;
-  height: auto;
-}
+
 
 /* Animação do título */
 #title {

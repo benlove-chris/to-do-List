@@ -4,8 +4,7 @@ import { getTarefas, createTarefa } from "../../services/tarefaService";
 import TarefaForm from "../tarefaForm/TarefaForm";
 import TarefaList from "../tarefaList/TarefaList";
 import "./Home.css";
-import userImage from './user.png';
-
+import userImage from "../../user.png";
 
 const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
@@ -52,7 +51,7 @@ const Home = ({ tema, mudarTema }) => {
     novasTarefas[index].concluida = !novasTarefas[index].concluida;
     setTarefas(novasTarefas);
     if (modoConvidado) {
-      localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
+      localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
     }
   };
 
@@ -60,38 +59,45 @@ const Home = ({ tema, mudarTema }) => {
     const novasTarefas = tarefas.filter((_, i) => i !== index);
     setTarefas(novasTarefas);
     if (modoConvidado) {
-      localStorage.setItem('tarefas', JSON.stringify(novasTarefas));
+      localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
     }
   };
-  
+
   const handleEditarTarefa = (index, novaDescricao) => {
-  const novasTarefas = [...tarefas];
-  novasTarefas[index].descricao = novaDescricao; // Atualiza a descrição
-  setTarefas(novasTarefas);
+    const novasTarefas = [...tarefas];
+    novasTarefas[index].descricao = novaDescricao; // Atualiza a descrição
+    setTarefas(novasTarefas);
 
-  if (modoConvidado) {
-    localStorage.setItem('tarefas', JSON.stringify(novasTarefas)); // Atualiza no localStorage
-  }
-};
-
+    if (modoConvidado) {
+      localStorage.setItem("tarefas", JSON.stringify(novasTarefas)); // Atualiza no localStorage
+    }
+  };
 
   const handleLogin = () => {
     if (!token) {
-      navigate('/login');
+      navigate("/login");
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setModoConvidado(true);
-    navigate('/');
+    navigate("/");
   };
 
+  const isAuthenticated = !!token;  // Verifica se o usuário está autenticado
 
   return (
     <div className={`home-container ${tema}`}>
       <div id="header">
-        <div className="flexrow-container">
+          <div className="flexrow-container">
+          <div className="left-section">
+            <button className="login-button" onClick={isAuthenticated ? handleLogout : handleLogin}>
+              <i className={`fas ${isAuthenticated ? 'fa-user' : 'fa-sign-in-alt'}`}></i>
+              {isAuthenticated ? ' Usuário' : ' Entrar'}
+            </button>
+          </div>
+        
           <div
             className="standard-theme theme-selector"
             onClick={() => mudarTema("standard")}
@@ -104,43 +110,21 @@ const Home = ({ tema, mudarTema }) => {
             className="darker-theme theme-selector"
             onClick={() => mudarTema("darker")}
           ></div>
-          <div >
-            {!token && (
-              <img src={userImage} alt="User Icon" className="icon"/>
-            )}
-          </div>
         </div>
-
         <h1 id="title" className={tema === "darker" ? "darker-title" : ""}>
-          let's start.
+          Let's start.
           <div id="border"></div>
         </h1>
       </div>
       <div id="tarefaConteudo">
-
-      {modoConvidado && (
-        <p className="modo-convidado">
-          Você está no modo convidado. Suas tarefas serão salvas apenas localmente.
-        </p>
-      )}
-      {!token ? (
-        <button className="login-button" onClick={handleLogin}>
-          Fazer login para salvar tarefas no servidor
-        </button>
-      ) : (
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      )}
-      <TarefaForm onAddTarefa={handleAddTarefa} />
-      <TarefaList
-        tarefas={tarefas}
-        onConcluir={handleConcluirTarefa}
-        onExcluir={handleExcluirTarefa}
-        onEditar={handleEditarTarefa}
-      />
-    
-    </div>
+        <TarefaForm onAddTarefa={handleAddTarefa} />
+        <TarefaList
+          tarefas={tarefas}
+          onConcluir={handleConcluirTarefa}
+          onExcluir={handleExcluirTarefa}
+          onEditar={handleEditarTarefa}
+        />
+      </div>
     </div>
   );
 };
