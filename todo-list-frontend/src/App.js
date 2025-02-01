@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+
 import LoginForm from './components/loginForm/LoginForm';
 import SignupForm from './components/signupForm/SignupForm';
 import Home from './components/home/Home';

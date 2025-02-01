@@ -1,87 +1,50 @@
-.signup-container {
-  padding: 20px;
-  max-width: 400px;
-  margin: 0 auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+.background-radial-gradient {
+  background-color: hsl(218, 41%, 15%);
+  background-image: radial-gradient(650px circle at 0% 0%,
+      hsl(218, 41%, 35%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%),
+    radial-gradient(1250px circle at 100% 100%,
+      hsl(218, 41%, 45%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%);
 }
 
-.signup-container h2 {
-  margin-bottom: 20px;
+#radius-shape-1 {
+  height: 220px;
+  width: 220px;
+  top: -60px;
+  left: -130px;
+  background: radial-gradient(#44006b, #ad1fff);
+  overflow: hidden;
 }
 
-.signup-container form input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s ease;
+#radius-shape-2 {
+  border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+  bottom: -60px;
+  right: -110px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(#44006b, #ad1fff);
+  overflow: hidden;
 }
 
-.signup-container form input:focus {
-  border-color: #007bff;
+.bg-glass {
+  background-color: hsla(0, 0%, 100%, 0.9) !important;
+  backdrop-filter: saturate(200%) blur(25px);
+
+}
+form {
+  size: 100em;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1rem; /* Garante que o tamanho do texto não mude */
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove paddings padrão */
 }
 
-.signup-container form input.input-error {
-  border-color: #ff4d4f; /* Cor de erro */
-  animation: shake 0.3s ease; /* Aplica a animação de vibrar */
-}
-
-.signup-container form .password-container {
-  position: relative;
-}
-
-.signup-container form .password-container input {
-  width: calc(100% - 80px); /* Deixa espaço para o botão */
-  display: inline-block;
-}
-
-.signup-container form .password-container .toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  color: #007bff;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 5px;
-}
-
-.signup-container form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.signup-container form button:hover {
-  background-color: #0056b3;
-}
-
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
