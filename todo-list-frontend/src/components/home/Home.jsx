@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTarefas, createTarefa } from "../../services/tarefaService";
-import TarefaForm from "../tarefaForm/TarefaForm";
 import TarefaList from "../tarefaList/TarefaList";
+import TarefaForm from "../tarefaForm/TarefaForm";
 import "./Home.css";
 import userImage from "../../user.png";
 

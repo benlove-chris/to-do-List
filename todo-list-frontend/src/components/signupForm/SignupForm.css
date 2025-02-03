@@ -38,13 +38,14 @@
   backdrop-filter: saturate(200%) blur(25px);
 
 }
+/*
 form {
   size: 100em;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-size: 1rem; /* Garante que o tamanho do texto não mude */
-  margin: 0; /* Remove margens padrão */
-  padding: 0; /* Remove paddings padrão */
-}
+  font-size: 1rem; Garante que o tamanho do texto não mude 
+  margin: 0; Remove margens padrão 
+  padding: 0;  Remove paddings padrão 
+}*/
 
