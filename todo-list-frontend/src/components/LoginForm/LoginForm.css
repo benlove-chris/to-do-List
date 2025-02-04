@@ -52,3 +52,18 @@
 .login-container a:hover {
   text-decoration: underline;
 }
+
+
+/* Estilo para a imagem */
+.login-image {
+  height: 100%; /* Faz a imagem ocupar 100% da altura do contêiner */
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+  object-position: center; /* Centraliza a imagem */
+}
+
+/* Ajustes para o layout responsivo */
+@media (max-width: 768px) {
+  .login-image {
+    height: 300px; /* Altura fixa para telas menores */
+  }
+}
