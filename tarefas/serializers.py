@@ -12,4 +12,4 @@ class TarefaSerializer(serializers.ModelSerializer):
         # Definimos os campos que serão incluídos na serialização
         fields = ['id', 'titulo', 'descricao', 'status', 'usuario', 'd_criacao', 'd_atualizacao']
         # Especificamos quais campos são somente leitura
-        read_only_fields = ['id', 'd_criacao', 'd_atualizacao']
+        read_only_fields = ['id', 'd_criacao', 'd_atualizacao', 'usuario']

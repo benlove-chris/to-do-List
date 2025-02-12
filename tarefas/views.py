@@ -5,11 +5,11 @@ dados são processados e retornados para o cliente (frontend ou API client).
 
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
-
-# Create your views here.
 from rest_framework import viewsets
 from .models import Tarefa
 from .serializers import TarefaSerializer
+
+# Create your views here.
 
 class TarefaViewSet(viewsets.ModelViewSet):
     queryset = Tarefa.objects.all().order_by('-d_criacao')
@@ -22,6 +22,10 @@ class TarefaViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         # Define o usuário autenticado como dono da tarefa ao criá-la
+        serializer.save(usuario=self.request.user)
+    
+    def perform_update(self, serializer):
+        # Define o usuário autenticado como dono da tarefa ao editá-la
         serializer.save(usuario=self.request.user)
     
     
