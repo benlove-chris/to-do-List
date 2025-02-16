@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getTarefas, createTarefa, updateTarefa, deleteTarefa } from "../../services/tarefaService"; // Importe deleteTarefa
+import { getTarefas, createTarefa, updateTarefa, deleteTarefa } from "../../services/tarefaService"; // Importe updateTarefa
 import TarefaList from "../tarefaList/TarefaList";
 import TarefaForm from "../tarefaForm/TarefaForm";
 import "./Home.css";
@@ -29,16 +29,16 @@ const Home = ({ tema, mudarTema }) => {
     }
   }, [token]);
 
-  const handleAddTarefa = async (descricao) => {
-    if (!descricao.trim()) return;
+  const handleAddTarefa = async (titulo, status = false) => {
+    if (!titulo.trim() || !titulo.trim()) return;
 
     if (modoConvidado) {
-      const novasTarefas = [...tarefas, { descricao, concluida: false }];
+      const novasTarefas = [...tarefas, { titulo, status }];
       setTarefas(novasTarefas);
       localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
     } else {
       try {
-        const tarefaCriada = await createTarefa({ descricao }, token);
+        const tarefaCriada = await createTarefa({ titulo, status }, token);
         setTarefas([...tarefas, tarefaCriada]);
       } catch (error) {
         console.error("Erro ao criar tarefa:", error);
@@ -46,12 +46,21 @@ const Home = ({ tema, mudarTema }) => {
     }
   };
 
-  const handleConcluirTarefa = (index) => {
+  const handleConcluirTarefa = async (index) => {
     const novasTarefas = [...tarefas];
     novasTarefas[index].concluida = !novasTarefas[index].concluida;
     setTarefas(novasTarefas);
+
     if (modoConvidado) {
       localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
+    } else {
+      try {
+        const tarefaAtualizada = await updateTarefa(novasTarefas[index].id, novasTarefas[index], token);
+        novasTarefas[index] = tarefaAtualizada;
+        setTarefas(novasTarefas);
+      } catch (error) {
+        console.error("Erro ao atualizar status da tarefa:", error);
+      }
     }
   };
 
@@ -72,9 +81,9 @@ const Home = ({ tema, mudarTema }) => {
     }
   };
 
-  const handleEditarTarefa = async (index, novaDescricao) => {
+  const handleEditarTarefa = async (index, novoTitulo) => {
     const novasTarefas = [...tarefas];
-    novasTarefas[index].descricao = novaDescricao; // Atualiza a descrição
+    novasTarefas[index].titulo = novoTitulo; // Atualiza o titulo
     setTarefas(novasTarefas);
 
     if (modoConvidado) {

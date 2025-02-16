@@ -25,7 +25,7 @@ export const createTarefa = async (novaTarefa, token) => {
     const response = await api.post('tarefas/', novaTarefa, {
 
       headers: {
-        Authorization: 'Token 4c62da4b4d7a476d8e413bfec9be5491dec29df3',
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     });

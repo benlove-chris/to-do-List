@@ -1,19 +1,18 @@
-// src/components/tarefaList/TarefaList.js
 import React, { useState } from 'react';
 import './TarefaList.css';
 
 const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
   const [editandoIndex, setEditandoIndex] = useState(null); // Armazena o índice da tarefa sendo editada
-  const [novaDescricao, setNovaDescricao] = useState(''); // Armazena a nova descrição
+  const [novoTitulo, setNovoTitulo] = useState(''); // Armazena a nova descrição
 
-  const iniciarEdicao = (index, descricao) => {
+  const iniciarEdicao = (index, titulo) => {
     setEditandoIndex(index);
-    setNovaDescricao(descricao); // Preenche com a descrição atual
+    setNovoTitulo(titulo); // Preenche com a descrição atual
   };
 
   const salvarEdicao = (index) => {
-    if (novaDescricao.trim()) {
-      onEditar(index, novaDescricao); // Chama a função passada por props para salvar a alteração
+    if (novoTitulo.trim()) {
+      onEditar(index, novoTitulo); // Chama a função passada por props para salvar a alteração
       setEditandoIndex(null); // Sai do modo de edição
     }
   };
@@ -24,7 +23,7 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
 
   return (
     <div className="tarefa-list">
-      {tarefas.map((tarefa, index) => (
+      {tarefas.slice().reverse().map((tarefa, index) => (
         <div
           key={index}
           className={`tarefa-item ${tarefa.concluida ? 'concluida' : ''}`}
@@ -33,28 +32,28 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
           <input
             type="checkbox"
             checked={tarefa.concluida}
-            onChange={() => onConcluir(index)}
+            onChange={() => onConcluir(tarefas.length - 1 - index)}
             className="concluir-checkbox"
           />
 
           {/* Alternar entre modo de exibição e edição */}
-          {editandoIndex === index ? (
+          {editandoIndex === tarefas.length - 1 - index ? (
             <input
               type="text"
-              value={novaDescricao}
-              onChange={(e) => setNovaDescricao(e.target.value)}
+              value={novoTitulo}
+              onChange={(e) => setNovoTitulo(e.target.value)}
               className="tarefa-input"
             />
           ) : (
-            <span>{tarefa.descricao}</span>
+            <span>{tarefa.titulo}</span>
           )}
 
           <div className="tarefa-buttons">
-            {editandoIndex === index ? (
+            {editandoIndex === tarefas.length - 1 - index ? (
               <>
                 <button
                   className="salvar-button"
-                  onClick={() => salvarEdicao(index)}
+                  onClick={() => salvarEdicao(tarefas.length - 1 - index)}
                 >
                   Salvar
                 </button>
@@ -65,14 +64,14 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
             ) : (
               <button
                 className="editar-button"
-                onClick={() => iniciarEdicao(index, tarefa.descricao)}
+                onClick={() => iniciarEdicao(tarefas.length - 1 - index, tarefa.titulo)}
               >
                 Editar
               </button>
             )}
             <button
               className="excluir-button"
-              onClick={() => onExcluir(index)}
+              onClick={() => onExcluir(tarefas.length - 1 - index)}
             >
               Excluir
             </button>

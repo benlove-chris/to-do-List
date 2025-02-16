@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import './TarefaForm.css';
 
 const TarefaForm = ({ onAddTarefa }) => {
-  const [descricao, setDescricao] = useState('');
+  const [titulo, setTitulo] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddTarefa(descricao);
-    setDescricao('');
+    onAddTarefa(titulo);
+    setTitulo('');
   };
 
   return (
@@ -15,8 +15,8 @@ const TarefaForm = ({ onAddTarefa }) => {
       <input
         type="text"
         placeholder="Digite uma nova tarefa"
-        value={descricao}
-        onChange={(e) => setDescricao(e.target.value)}
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
         className="input-tarefa"
       />
       <button type="submit" className="add-button">

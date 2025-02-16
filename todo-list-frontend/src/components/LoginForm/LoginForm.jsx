@@ -24,7 +24,7 @@ const LoginForm = () => {
     e.preventDefault();
     // Simulação de validação de login
     if (email === 'usuario@teste.com' && senha === 'senha123') {
-      localStorage.setItem('Bearer', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5Njc2NTUwLCJpYXQiOjE3Mzk2NzI5NTAsImp0aSI6ImVmZGZjOTZmY2M3MzQ2MTY5ZjVhNDY2YmRhMGNjOTExIiwidXNlcl9pZCI6M30.3I0fpZsAJEvmiMQnycXfTujzJgqXCPE5Dzm50uatTrY' );
+      localStorage.setItem('Bearer', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NzM0MzA4LCJpYXQiOjE3Mzk3MzA3MDgsImp0aSI6ImUxZjk3ZjM5OWIwMzQ1ZmI5OWZjMjU2YmYyY2U3MGZlIiwidXNlcl9pZCI6M30.NAAjpFwXIPkWMXN5u-CyVsUmm3c4uqNctJSIoS5j9tM' );
       window.location.href = '/'; // Redireciona para a página de tarefas
     } else {
       alert('Credenciais inválidas. Você será redirecionado para criar uma conta.');
