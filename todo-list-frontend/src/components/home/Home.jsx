@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getTarefas, createTarefa } from "../../services/tarefaService";
+import { getTarefas, createTarefa, updateTarefa, deleteTarefa } from "../../services/tarefaService"; // Importe deleteTarefa
 import TarefaList from "../tarefaList/TarefaList";
 import TarefaForm from "../tarefaForm/TarefaForm";
 import "./Home.css";
@@ -9,7 +9,7 @@ import userImage from "../../user.png";
 const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("Bearer");
   const [modoConvidado, setModoConvidado] = useState(!token);
 
   useEffect(() => {
@@ -55,21 +55,38 @@ const Home = ({ tema, mudarTema }) => {
     }
   };
 
-  const handleExcluirTarefa = (index) => {
-    const novasTarefas = tarefas.filter((_, i) => i !== index);
-    setTarefas(novasTarefas);
+  const handleExcluirTarefa = async (index) => {
+    const novasTarefas = [...tarefas];
     if (modoConvidado) {
+      novasTarefas.splice(index, 1);
+      setTarefas(novasTarefas);
       localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
+    } else {
+      try {
+        await deleteTarefa(novasTarefas[index].id, token);
+        novasTarefas.splice(index, 1);
+        setTarefas(novasTarefas);
+      } catch (error) {
+        console.error("Erro ao excluir tarefa:", error);
+      }
     }
   };
 
-  const handleEditarTarefa = (index, novaDescricao) => {
+  const handleEditarTarefa = async (index, novaDescricao) => {
     const novasTarefas = [...tarefas];
     novasTarefas[index].descricao = novaDescricao; // Atualiza a descrição
     setTarefas(novasTarefas);
 
     if (modoConvidado) {
       localStorage.setItem("tarefas", JSON.stringify(novasTarefas)); // Atualiza no localStorage
+    } else {
+      try {
+        const tarefaAtualizada = await updateTarefa(novasTarefas[index].id, novasTarefas[index], token); // Atualiza no backend
+        novasTarefas[index] = tarefaAtualizada;
+        setTarefas(novasTarefas);
+      } catch (error) {
+        console.error("Erro ao editar tarefa:", error);
+      }
     }
   };
 
@@ -80,7 +97,7 @@ const Home = ({ tema, mudarTema }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("Bearer");
     setModoConvidado(true);
     navigate("/");
   };
