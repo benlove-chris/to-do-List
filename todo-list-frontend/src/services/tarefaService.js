@@ -1,5 +1,14 @@
 import api from './api';
 
+export const login = async (usernameOrEmail, password) => {
+  try {
+    const response = await api.post('auth/login/', { username: usernameOrEmail, password });
+    return response.data.access; // Supondo que o token é retornado no campo 'access'
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getTarefas = async (token) => {
   //alert(token);
   try {

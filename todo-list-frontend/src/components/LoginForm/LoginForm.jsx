@@ -11,24 +11,25 @@ import {
   MDBInput,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
+import { login } from './../../services/tarefaService'; // Importe a função de login
 import celularImg from './images/celular.jpg'; // Importa a imagem
 import icone from './images/logo.png'
 import './LoginForm.css'; // Importa o arquivo CSS
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [userNameOrEmail, setUsernameOrEmail] = useState('lucas@teste.com');
+  const [password, setPassword] = useState('cetelbras');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulação de validação de login
-    if (email === 'usuario@teste.com' && senha === 'senha123') {
-      localStorage.setItem('Bearer', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM5NzM0MzA4LCJpYXQiOjE3Mzk3MzA3MDgsImp0aSI6ImUxZjk3ZjM5OWIwMzQ1ZmI5OWZjMjU2YmYyY2U3MGZlIiwidXNlcl9pZCI6M30.NAAjpFwXIPkWMXN5u-CyVsUmm3c4uqNctJSIoS5j9tM' );
+    try {
+      const token = await login(userNameOrEmail, password);
+      localStorage.setItem('Bearer', token);
+      //localStorage.setItem('userName', userame);
       window.location.href = '/'; // Redireciona para a página de tarefas
-    } else {
-      alert('Credenciais inválidas. Você será redirecionado para criar uma conta.');
-      window.location.href = '/signup'; // Caminho para a página de criação de conta
+    } catch (error) {
+      alert('Credenciais inválidas. Verifique suas informações de login.');
     }
   };
 
@@ -68,19 +69,19 @@ const LoginForm = () => {
               <form onSubmit={handleSubmit}>
                 <MDBInput
                   wrapperClass='mb-4'
-                  label='Email'
-                  id='email'
-                  type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  label='Usuario'
+                  id='usuario'
+                  type='text'
+                  value={userNameOrEmail}
+                  onChange={(e) => setUsernameOrEmail(e.target.value)}
                 />
                 <MDBInput
                   wrapperClass='mb-4'
                   label='Senha'
                   id='senha'
                   type={showPassword ? 'text' : 'password'}
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className='d-flex justify-content-center mb-4'>
                   <MDBCheckbox

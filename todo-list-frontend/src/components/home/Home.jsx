@@ -10,6 +10,7 @@ const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("Bearer");
+  const userName = localStorage.getItem("userName");
   const [modoConvidado, setModoConvidado] = useState(!token);
 
   useEffect(() => {
@@ -120,7 +121,7 @@ const Home = ({ tema, mudarTema }) => {
           <div className="left-section">
             <button className="login-button" onClick={isAuthenticated ? handleLogout : handleLogin}>
               <i className={`fas ${isAuthenticated ? 'fa-user' : 'fa-sign-in-alt'}`}></i>
-              {isAuthenticated ? ' Usuário' : ' Entrar'}
+              {isAuthenticated ? ` ${userName}` : ' Entrar'}
             </button>
           </div>
         
