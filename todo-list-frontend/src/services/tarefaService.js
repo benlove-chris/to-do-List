@@ -1,14 +1,17 @@
 import api from './api';
 
+
 export const login = async (usernameOrEmail, password) => {
   try {
     const response = await api.post('auth/login/', { username: usernameOrEmail, password });
-    return response.data.access; // Supondo que o token é retornado no campo 'access'
+    return {
+      token: response.data.access, // Supondo que o token é retornado no campo 'access'
+      user_name: response.data.user_name, // Supondo que o nome do usuário é retornado no campo 'user_name'
+    };
   } catch (error) {
     throw error;
   }
 };
-
 export const getTarefas = async (token) => {
   //alert(token);
   try {

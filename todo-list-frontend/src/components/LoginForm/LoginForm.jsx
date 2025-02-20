@@ -17,16 +17,19 @@ import icone from './images/logo.png'
 import './LoginForm.css'; // Importa o arquivo CSS
 
 const LoginForm = () => {
-  const [userNameOrEmail, setUsernameOrEmail] = useState('lucas@teste.com');
+  const [userNameOrEmail, setUsernameOrEmail] = useState('Lucas');
   const [password, setPassword] = useState('cetelbras');
-  const [showPassword, setShowPassword] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(true);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = await login(userNameOrEmail, password);
+      const response = await login(userNameOrEmail, password);
+      const token = response.token;
+      const userName = response.user_name;  // Supondo que a API retorna o nome do usuário
+
       localStorage.setItem('Bearer', token);
-      //localStorage.setItem('userName', userame);
+      localStorage.setItem('userName', userName);
       window.location.href = '/'; // Redireciona para a página de tarefas
     } catch (error) {
       alert('Credenciais inválidas. Verifique suas informações de login.');

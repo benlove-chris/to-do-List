@@ -1,3 +1,5 @@
+# views.py
+
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -17,7 +19,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
         if user and user.check_password(password):
             attrs["username"] = user.username
-            return super().validate(attrs)
+            data = super().validate(attrs)
+            data.update({"user_name": user.username})  # Adiciona o nome do usuário à resposta
+            return data
         else:
             raise serializers.ValidationError("No active account found with the given credentials")
 
