@@ -10,24 +10,24 @@ import {
   MDBInput,
   MDBCheckbox,
   MDBIcon
-}
-from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
+import { signup } from './../../services/tarefaService'; // Importe a função de signup
 
 const SignupForm = () => {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [username, setUsername] = useState('zezin');
+  const [email, setEmail] = useState('zezin@apostelo.vac');
+  const [password, setPassword] = useState('jesussave');
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ nome: false, email: false, senha: false });
+  const [errors, setErrors] = useState({ username: false, email: false, password: false });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Verifica se algum campo está vazio
     const newErrors = {
-      nome: !nome.trim(),
+      username: !username.trim(),
       email: !email.trim(),
-      senha: !senha.trim(),
+      password: !password.trim(),
     };
 
     setErrors(newErrors);
@@ -37,10 +37,14 @@ const SignupForm = () => {
       return;
     }
 
-    // Lógica para criar a conta
-    alert(`Conta criada com sucesso! Bem-vindo(a), ${nome}!`);
-    // Após criar a conta, redireciona para o login
-    window.location.href = '/login';
+    try {
+      const response = await signup(username, email, password);
+      alert(`Conta criada com sucesso! Bem-vindo(a), ${username}!`);
+      window.location.href = '/login'; // Redireciona para a página de login
+    } catch (error) {
+      alert('Erro ao criar conta. Por favor, tente novamente.');
+      console.error('Erro ao criar conta:', error);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -76,9 +80,9 @@ const SignupForm = () => {
                     label='Nome'
                     id='form2' 
                     type='text'
-                    value={nome}
-                    onChange={(e) => setNome(e.target.value)}
-                    className={errors.nome ? 'input-error' : ''}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className={errors.username ? 'input-error' : ''}
                 />
                   
 
@@ -95,9 +99,9 @@ const SignupForm = () => {
                     label='Senha'
                     id='senha'
                     type={showPassword ? 'text' : 'password'}
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                    className={errors.senha ? 'is-invalid' : ''}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className={errors.password ? 'is-invalid' : ''}
                   />
 
                   <div className='d-flex justify-content-center mb-4'>

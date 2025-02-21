@@ -1,6 +1,16 @@
 import api from './api';
 
+// criar usuario - create user
+export const signup = async (username, email, password) => {
+  try {
+    const response = await api.post('signup/', { username, email, password });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
+// autenticar o usuario - login
 export const login = async (usernameOrEmail, password) => {
   try {
     const response = await api.post('auth/login/', { username: usernameOrEmail, password });
@@ -12,6 +22,7 @@ export const login = async (usernameOrEmail, password) => {
     throw error;
   }
 };
+
 export const getTarefas = async (token) => {
   //alert(token);
   try {

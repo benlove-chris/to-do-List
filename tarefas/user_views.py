@@ -11,19 +11,19 @@ def criar_usuario(request):
             # Tenta carregar os dados JSON
             data = json.loads(request.body.decode('utf-8'))
 
-            nome = data.get('nome')  # Nome
+            username = data.get('username')  # username
             email = data.get('email')  # E-mail
-            senha = data.get('senha')  # Senha
+            password = data.get('password')  # password
 
             # Verifica se todos os campos foram preenchidos
-            if not nome or not email or not senha:
+            if not username or not email or not password:
                 return JsonResponse({'erro': 'Todos os campos são obrigatórios'}, status=400)
 
             # Criar o usuário com as informações fornecidas
             usuario = User.objects.create_user(
-                username=nome,  # O username é obrigatório
+                username=username,  # O username é obrigatório
                 email=email,
-                password=senha,
+                password=password,
             )
 
             # Gerar o JWT para o novo usuário
