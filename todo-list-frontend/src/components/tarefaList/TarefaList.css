@@ -39,32 +39,32 @@
 
 /* Estilo do botão editar */
 .editar-button {
-  background-color: #ffc107; /* Amarelo */
+  background-color: #4f595a;  /* Amarelo */
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  color: white;
+  color: rgb(240, 240, 240);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .editar-button:hover {
-  background-color: #e0a800;
+  background-color: #10383b ;
 }
 
 /* Estilo do botão excluir */
 .excluir-button {
-  background-color: #dc3545; /* Vermelho */
+  background-color: #4f595a; /* Vermelho */
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  color: white;
+  color: rgb(240, 240, 240);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .excluir-button:hover {
-  background-color: #b02a37;
+  background-color: #10383b ;
 }
 
 
@@ -115,7 +115,8 @@
   margin: 20px auto; /* Espaço acima e abaixo */
   padding: 0 10px; /* Espaçamento horizontal interno */
   max-width: 500px; /* Limita a largura máxima da lista */
-  text-align: center; /* Centraliza o texto */
+  text-align: center;
+  width: 900px; /* Centraliza o texto */
 }
 
 /* Estilo dos itens da tarefa */
@@ -125,7 +126,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 5px;
   margin: 10px auto; /* Espaçamento entre itens */
   width: 100%; /* Garante que o item ocupe toda a largura disponível */
@@ -135,19 +136,18 @@
 
 /* Cor de fundo para o tema padrão */
 .standard .tarefa-item {
-  background-color: rgb(26, 27, 27);
+  background-color: rgba(118, 133, 131, 0.315);
   color: #ffdfdb; /* Texto no tema padrão */
 }
 
 /* Cor de fundo para o tema claro */
 .light .tarefa-item {
-  background-color:#AEB1B4;
   color: #1a150e; /* Texto no tema claro */
 }
 
 /* Cor de fundo para o tema escuro */
 .darker .tarefa-item {
-  background-color: #01394c;
+  background-color: transparent;
   color: #ffffff; /* Texto no tema escuro */
 }
 

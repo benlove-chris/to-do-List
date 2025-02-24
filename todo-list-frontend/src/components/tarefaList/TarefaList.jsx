@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
+import { Pencil, Trash, Check, X } from 'lucide-react';
 import './TarefaList.css';
 
 const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
-  const [editandoIndex, setEditandoIndex] = useState(null); // Armazena o índice da tarefa sendo editada
-  const [novoTitulo, setNovoTitulo] = useState(''); // Armazena a nova descrição
+  const [editandoIndex, setEditandoIndex] = useState(null);
+  const [novoTitulo, setNovoTitulo] = useState('');
 
   const iniciarEdicao = (index, titulo) => {
     setEditandoIndex(index);
-    setNovoTitulo(titulo); // Preenche com a descrição atual
+    setNovoTitulo(titulo);
   };
 
   const salvarEdicao = (index) => {
     if (novoTitulo.trim()) {
-      onEditar(index, novoTitulo); // Chama a função passada por props para salvar a alteração
-      setEditandoIndex(null); // Sai do modo de edição
+      onEditar(index, novoTitulo);
+      setEditandoIndex(null);
     }
   };
 
   const cancelarEdicao = () => {
-    setEditandoIndex(null); // Sai do modo de edição sem salvar
+    setEditandoIndex(null);
   };
 
   return (
@@ -28,7 +29,6 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
           key={index}
           className={`tarefa-item ${tarefa.concluida ? 'concluida' : ''}`}
         >
-          {/* Checkbox para concluir a tarefa */}
           <input
             type="checkbox"
             checked={tarefa.concluida}
@@ -36,7 +36,6 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
             className="concluir-checkbox"
           />
 
-          {/* Alternar entre modo de exibição e edição */}
           {editandoIndex === tarefas.length - 1 - index ? (
             <input
               type="text"
@@ -51,29 +50,20 @@ const TarefaList = ({ tarefas, onConcluir, onExcluir, onEditar }) => {
           <div className="tarefa-buttons">
             {editandoIndex === tarefas.length - 1 - index ? (
               <>
-                <button
-                  className="salvar-button"
-                  onClick={() => salvarEdicao(tarefas.length - 1 - index)}
-                >
-                  Salvar
+                <button className="salvar-button" onClick={() => salvarEdicao(tarefas.length - 1 - index)}>
+                  <Check size={18} />
                 </button>
                 <button className="cancelar-button" onClick={cancelarEdicao}>
-                  Cancelar
+                  <X size={18} />
                 </button>
               </>
             ) : (
-              <button
-                className="editar-button"
-                onClick={() => iniciarEdicao(tarefas.length - 1 - index, tarefa.titulo)}
-              >
-                Editar
+              <button className="editar-button" onClick={() => iniciarEdicao(tarefas.length - 1 - index, tarefa.titulo)}>
+                <Pencil size={18} />
               </button>
             )}
-            <button
-              className="excluir-button"
-              onClick={() => onExcluir(tarefas.length - 1 - index)}
-            >
-              Excluir
+            <button className="excluir-button" onClick={() => onExcluir(tarefas.length - 1 - index)}>
+              <Trash size={18} />
             </button>
           </div>
         </div>
