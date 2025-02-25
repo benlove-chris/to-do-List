@@ -196,5 +196,28 @@ body {
 }
 
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 1000;
+}
 
-
+.modal_x {
+  position: absolute;
+  background: #062e3f;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  z-index: 1001;
+  top: 60px; /* Ajuste a distância do topo */
+  left: 20px; /* Ajuste a distância da esquerda */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

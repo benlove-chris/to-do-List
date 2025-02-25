@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getTarefas, createTarefa, updateTarefa, deleteTarefa } from "../../services/tarefaService"; // Importe updateTarefa
+import { getTarefas, createTarefa, updateTarefa, deleteTarefa } from "../../services/tarefaService";
 import TarefaList from "../tarefaList/TarefaList";
 import TarefaForm from "../tarefaForm/TarefaForm";
+import Modal from 'react-modal';
 import "./Home.css";
 import userImage from "../../user.png";
 
+Modal.setAppElement('#root'); // Para acessibilidade
+
 const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false); // Estado para controlar a abertura do modal
   const navigate = useNavigate();
   const token = localStorage.getItem("Bearer");
   const userName = localStorage.getItem("userName");
@@ -112,14 +116,22 @@ const Home = ({ tema, mudarTema }) => {
     navigate("/");
   };
 
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
   const isAuthenticated = !!token;  // Verifica se o usuário está autenticado
+
+  const handleProfile = () => {
+    closeModal();
+    navigate("/perfil");
+  };
 
   return (
     <div className={`home-container ${tema}`}>
       <div id="header">
-          <div className="flexrow-container">
+        <div className="flexrow-container">
           <div className="left-section">
-            <button className="login-button" onClick={isAuthenticated ? handleLogout : handleLogin}>
+            <button className="login-button" onClick={isAuthenticated ? openModal : handleLogin}>
               <i className={`fas ${isAuthenticated ? 'fa-user' : 'fa-sign-in-alt'}`}></i>
               {isAuthenticated ? ` ${userName}` : ' Entrar'}
             </button>
@@ -153,6 +165,20 @@ const Home = ({ tema, mudarTema }) => {
           onEditar={handleEditarTarefa}
         />
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Opções do Usuário"
+        className="modal_x"
+        overlayClassName="modal-overlay"
+      >
+        
+        <h2>Opções do Usuário</h2>
+        {userName}
+        <button onClick={handleLogout}>Sair</button>
+        <button onClick={handleProfile}>Perfil do Usuário</button>
+        <button onClick={closeModal}>Fechar</button>
+      </Modal>
     </div>
   );
 };
