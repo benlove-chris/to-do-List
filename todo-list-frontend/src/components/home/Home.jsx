@@ -173,11 +173,19 @@ const Home = ({ tema, mudarTema }) => {
         overlayClassName="modal-overlay"
       >
         
-        <h2>Opções do Usuário</h2>
-        {userName}
+        
+        
+        <button type="button"  title="Conta" role="menuitem">
+          <div class="userConta">
+              <p className="userNameModal">{userName}</p>
+              <p class="userEmailModal">anelusbenlove@gmail.com</p>
+          </div>
+        </button><br></br>
+
         <button onClick={handleLogout}>Sair</button>
-        <button onClick={handleProfile}>Perfil do Usuário</button>
-        <button onClick={closeModal}>Fechar</button>
+        
+        
+        
       </Modal>
     </div>
   );

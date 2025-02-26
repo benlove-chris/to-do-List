@@ -196,6 +196,8 @@ body {
 }
 
 
+/*Modal*/
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -214,10 +216,69 @@ body {
   background: #062e3f;
   padding: 20px;
   border-radius: 8px;
-  max-width: 400px;
+  max-width: 250px;
   width: 100%;
   z-index: 1001;
   top: 60px; /* Ajuste a distância do topo */
-  left: 20px; /* Ajuste a distância da esquerda */
+  left: 60px; /* Mesmo valor do margin-left do ícone do usuário */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
 }
+
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estiliza os botões dentro do modal */
+.modal_x button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  background-color:#1e353f;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.modal_x button:hover {
+  background-color: #0056b3;
+}
+
+/* Ajuste para o botão de logout */
+.modal_x button:last-child {
+  background-color: #1e353f;
+}
+
+.modal_x button:last-child:hover {
+  background-color: #a71d2a;
+}
+
+/* Estiliza o nome do usuário */
+.modal_x p {
+  margin-bottom: 5px;
+  font-size: small;
+}
+
+.userConta{
+  text-align: justify;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .modal_x {
+    width: 90%;
+  }
+}
+
