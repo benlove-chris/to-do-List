@@ -3,39 +3,46 @@ import { useNavigate } from "react-router-dom";
 import { getTarefas, createTarefa, updateTarefa, deleteTarefa } from "../../services/tarefaService";
 import TarefaList from "../tarefaList/TarefaList";
 import TarefaForm from "../tarefaForm/TarefaForm";
-import Modal from 'react-modal';
+import Modal from "react-modal";
+import { FaArrowLeft } from "react-icons/fa"; // Ícone de seta
 import "./Home.css";
-import userImage from "../../user.png";
 
-Modal.setAppElement('#root'); // Para acessibilidade
+Modal.setAppElement("#root"); // Para acessibilidade
 
 const Home = ({ tema, mudarTema }) => {
-  const [tarefas, setTarefas] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false); // Estado para controlar a abertura do modal
   const navigate = useNavigate();
+
+  // Estados principais
+  const [tarefas, setTarefas] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalContaIsOpen, setModalContaIsOpen] = useState(false);
+
+  // Verificação de usuário autenticado
   const token = localStorage.getItem("Bearer");
   const userName = localStorage.getItem("userName");
   const [modoConvidado, setModoConvidado] = useState(!token);
 
+  // Carregar tarefas do usuário
   useEffect(() => {
-    if (token) {
-      const fetchTarefas = async () => {
+    const fetchTarefas = async () => {
+      if (token) {
         try {
           const tarefasAPI = await getTarefas(token);
           setTarefas(tarefasAPI);
         } catch (error) {
           console.error("Erro ao buscar tarefas:", error);
         }
-      };
-      fetchTarefas();
-    } else {
-      const tarefasLocal = JSON.parse(localStorage.getItem("tarefas") || "[]");
-      setTarefas(tarefasLocal);
-    }
+      } else {
+        const tarefasLocal = JSON.parse(localStorage.getItem("tarefas") || "[]");
+        setTarefas(tarefasLocal);
+      }
+    };
+    fetchTarefas();
   }, [token]);
 
+  // Adicionar tarefa
   const handleAddTarefa = async (titulo, status = false) => {
-    if (!titulo.trim() || !titulo.trim()) return;
+    if (!titulo.trim()) return;
 
     if (modoConvidado) {
       const novasTarefas = [...tarefas, { titulo, status }];
@@ -51,26 +58,27 @@ const Home = ({ tema, mudarTema }) => {
     }
   };
 
+  // Alterar status da tarefa (concluir ou não)
   const handleConcluirTarefa = async (index) => {
     const novasTarefas = [...tarefas];
     novasTarefas[index].concluida = !novasTarefas[index].concluida;
     setTarefas(novasTarefas);
 
-    if (modoConvidado) {
-      localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
-    } else {
+    if (!modoConvidado) {
       try {
-        const tarefaAtualizada = await updateTarefa(novasTarefas[index].id, novasTarefas[index], token);
-        novasTarefas[index] = tarefaAtualizada;
-        setTarefas(novasTarefas);
+        await updateTarefa(novasTarefas[index].id, novasTarefas[index], token);
       } catch (error) {
         console.error("Erro ao atualizar status da tarefa:", error);
       }
+    } else {
+      localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
     }
   };
 
+  // Excluir tarefa
   const handleExcluirTarefa = async (index) => {
     const novasTarefas = [...tarefas];
+
     if (modoConvidado) {
       novasTarefas.splice(index, 1);
       setTarefas(novasTarefas);
@@ -86,106 +94,107 @@ const Home = ({ tema, mudarTema }) => {
     }
   };
 
+  // Editar tarefa
   const handleEditarTarefa = async (index, novoTitulo) => {
     const novasTarefas = [...tarefas];
-    novasTarefas[index].titulo = novoTitulo; // Atualiza o titulo
+    novasTarefas[index].titulo = novoTitulo;
     setTarefas(novasTarefas);
 
-    if (modoConvidado) {
-      localStorage.setItem("tarefas", JSON.stringify(novasTarefas)); // Atualiza no localStorage
-    } else {
+    if (!modoConvidado) {
       try {
-        const tarefaAtualizada = await updateTarefa(novasTarefas[index].id, novasTarefas[index], token); // Atualiza no backend
-        novasTarefas[index] = tarefaAtualizada;
-        setTarefas(novasTarefas);
+        await updateTarefa(novasTarefas[index].id, novasTarefas[index], token);
       } catch (error) {
         console.error("Erro ao editar tarefa:", error);
       }
     }
   };
 
+  // Login / Logout
   const handleLogin = () => {
-    if (!token) {
-      navigate("/login");
-    }
+    if (!token) navigate("/login");
   };
 
   const handleLogout = () => {
     localStorage.removeItem("Bearer");
+    localStorage.removeItem("userName");
+    localStorage.setItem('userName', "My friend");
     setModoConvidado(true);
+    closeModal();
     navigate("/");
   };
 
+  // Controle de modais
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
+  const openModalConta = () => setModalContaIsOpen(true);
+  const closeModalConta = () => setModalContaIsOpen(false);
 
-  const isAuthenticated = !!token;  // Verifica se o usuário está autenticado
-
-  const handleProfile = () => {
-    closeModal();
-    navigate("/perfil");
-  };
+  const isAuthenticated = !!token;
 
   return (
     <div className={`home-container ${tema}`}>
-      <div id="header">
+      {/* Header */}
+      <header id="header">
         <div className="flexrow-container">
           <div className="left-section">
             <button className="login-button" onClick={isAuthenticated ? openModal : handleLogin}>
-              <i className={`fas ${isAuthenticated ? 'fa-user' : 'fa-sign-in-alt'}`}></i>
-              {isAuthenticated ? ` ${userName}` : ' Entrar'}
+              <i className={`fas ${isAuthenticated ? "fa-user" : "fa-sign-in-alt"}`}></i>
+              {isAuthenticated ? ` ${userName}` : " Entrar"}
             </button>
           </div>
-        
-          <div
-            className="standard-theme theme-selector"
-            onClick={() => mudarTema("standard")}
-          ></div>
-          <div
-            className="light-theme theme-selector"
-            onClick={() => mudarTema("light")}
-          ></div>
-          <div
-            className="darker-theme theme-selector"
-            onClick={() => mudarTema("darker")}
-          ></div>
-        </div>
-        <h1 id="title" className={tema === "darker" ? "darker-title" : ""}>
-          welcome, {userName}. <br></br>
-          Let's start.
-          <div id="border"></div>
-        </h1>
-      </div>
-      <div id="tarefaConteudo">
-        <TarefaForm onAddTarefa={handleAddTarefa} />
-        <TarefaList
-          tarefas={tarefas}
-          onConcluir={handleConcluirTarefa}
-          onExcluir={handleExcluirTarefa}
-          onEditar={handleEditarTarefa}
-        />
-      </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Opções do Usuário"
-        className="modal_x"
-        overlayClassName="modal-overlay"
-      >
-        
-        
-        
-        <button type="button"  title="Conta" role="menuitem">
-          <div class="userConta">
-              <p className="userNameModal">{userName}</p>
-              <p class="userEmailModal">anelusbenlove@gmail.com</p>
-          </div>
-        </button><br></br>
 
+          {/* Seletor de temas */}
+          {["standard", "light", "darker"].map((theme) => (
+            <div key={theme} className={`${theme}-theme theme-selector`} onClick={() => mudarTema(theme)} />
+          ))}
+        </div>
+        <h1 id="title">Welcome, {userName}. <br /> Let's start.</h1>
+      </header>
+
+      {/* Lista de Tarefas */}
+      <main id="tarefaConteudo">
+        <TarefaForm onAddTarefa={handleAddTarefa} />
+        <TarefaList tarefas={tarefas} onConcluir={handleConcluirTarefa} onExcluir={handleExcluirTarefa} onEditar={handleEditarTarefa} />
+      </main>
+
+      {/* Modal Principal */}
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Opções do Usuário" className="modal_x" overlayClassName="modal-overlay">
+        <button type="button" title="Conta" onClick={openModalConta}>
+          <div className="userConta">
+            <p className="userNameModal">{userName}</p>
+            <p className="userEmailModal">anelusbenlove@gmail.com</p>
+          </div>
+        </button>
+        
+        <hr className="modal-divider" />
+        <br />
         <button onClick={handleLogout}>Sair</button>
+      </Modal>
+
+      {/* Modal Conta */}
+      <Modal isOpen={modalContaIsOpen} onRequestClose={closeModalConta} contentLabel="Conta" className="modal_x" overlayClassName="modal-overlay" >
+        <div className="divConta">
+          <button className="back-button" onClick={closeModalConta}>
+            <FaArrowLeft size={20} />
+          </button>
+          <h2>Conta</h2>
+        </div>
+        <button className="update-name-button">
+          <span>Nome</span> 
+          <span className="name-label">{userName}</span>
+
+        </button>
         
-        
-        
+
+        <hr className="modal-divider" />
+
+        <div className="del-section">
+          <h3 className="del-title">Excluir minha conta</h3>
+          <p className="del-text">
+            Isso excluirá permanentemente sua conta e todas as suas tarefas.
+            <button type="button" className="delete-account-button">Excluir conta</button>
+          </p>
+        </div>
       </Modal>
     </div>
   );

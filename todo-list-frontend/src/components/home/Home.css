@@ -212,7 +212,7 @@ body {
 }
 
 .modal_x {
-  position: absolute;
+  position: relative;
   background: #062e3f;
   padding: 20px;
   border-radius: 8px;
@@ -253,7 +253,7 @@ body {
 }
 
 .modal_x button:hover {
-  background-color: #0056b3;
+  background-color:  #393e41;
 }
 
 /* Ajuste para o botão de logout */
@@ -262,7 +262,7 @@ body {
 }
 
 .modal_x button:last-child:hover {
-  background-color: #a71d2a;
+  background-color: rgb(145, 139, 128);
 }
 
 /* Estiliza o nome do usuário */
@@ -282,3 +282,160 @@ body {
   }
 }
 
+
+/* Garante que o modal tenha posição relativa */
+.modal_x {
+  position: relative; 
+}
+
+/*modal conta*/
+.modal_x:last-child {
+ color: white;
+}
+
+.modal_x:last-child h2 {
+  
+    margin-top: 1px; 
+    flex-grow: 1; 
+    padding-right: 32px; 
+    text-align: center; 
+    text-transform: uppercase; 
+    color: #71717A; 
+    font-size: 0.75rem; 
+
+ }
+
+ .modal_x:last-child .divConta{
+  display: flex; /* flex */
+    align-items: center; /* items-center */
+    padding-bottom: 1rem; /* pb-4 */
+ }
+
+ .modal_x:last-child .back-button {
+  position: relative; /* relative */
+  display: flex; /* flex */
+  align-items: center; /* items-center */
+  color: white; /* text-foreground-800 */
+  fill: #2D3748; /* fill-foreground-800 */
+  background-color: transparent; /* bg-transparent */
+  font-size: 0.75rem; /* text-xs */
+  justify-content: center; /* justify-center */
+  width: 2rem; /* size-8 */
+  height: 2rem; /* size-8 */
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+
+.modal_x:last-child .back-button:hover{
+
+  background-color: rgba(0, 0, 0, 0.05); 
+}
+
+
+/* fim modal conta*/
+
+/*modal 2*/
+.modal_x:last-child .update-name-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  color: var(--foreground-800);
+  fill: var(--foreground-800);
+  background-color: transparent;
+  font-size: 0.875rem; 
+  min-height: 2.5rem; 
+  min-width: 2.5rem; 
+  padding: 0.5rem 0.75rem; 
+  gap: 0.5rem; 
+  border-radius: 0.75rem; 
+  outline-width: 2px;
+  outline-offset: 1px;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.modal_x:last-child .update-name-button:hover {
+  background-color: rgba(0, 0, 0, 0.05); 
+}
+
+.modal_x:last-child .update-name-button:active {
+  background-color: rgba(0, 0, 0, 0.03); 
+  color: var(--foreground-600);
+  fill: var(--foreground-600);
+}
+
+.modal_x:last-child .update-name-button.dark:active {
+  color: var(--foreground-650);
+  fill: var(--foreground-650);
+  background-color: rgba(255, 255, 255, 0.05); /* dark:active:bg-white/5 */
+}
+
+.modal_x:last-child .update-name-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+}
+
+.modal_x:last-child .name-label {
+  margin-top: 1px; /* mt-px */
+  text-transform: uppercase;
+  text-align: end;
+  font-size: 0.7rem; 
+  color: #6b7280; 
+}
+
+.modal_x:last-child .dark .name-label {
+  color: #cbd5e1; /* dark:text-slate-350 */
+}
+
+
+
+/* section delete*/
+.modal_x:last-child .del-section {
+  display: flex; /* flex */
+  flex-direction: column; /* flex-col */
+  gap: 0.5rem; /* gap-2 */
+  padding: 1rem; /* p-3 */
+  
+  
+}
+
+.modal_x:last-child .del-title {
+  font-size: 0.875rem; /* text-sm */
+  
+}
+
+.modal_x:last-child .del-text {
+  color: wheat;
+  font-size: 0.75rem; /* text-foreground-700 */
+  
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
+    word-spacing: -0.5px;
+    
+}
+
+
+
+.modal_x:last-child .delete-account-button {
+  all: unset;
+  padding-left: 0.25rem; /* pl-1 */
+  color: #E53E3E; /* text-system-red-550 */
+  display: inline;
+  background-color: transparent;
+  cursor: pointer;
+  
+  
+}
+
+.modal_x:last-child .delete-account-button:hover {
+   /* dark:text-system-red-350 */
+  background-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
