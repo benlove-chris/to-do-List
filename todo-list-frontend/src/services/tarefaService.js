@@ -34,7 +34,9 @@ export const getTarefas = async (token) => {
     return response.data;
   } catch (error) {
     if (error.response && error.response.status === 401) {
+
       console.error('Erro 401: Não autorizado. Verifique o token de autenticação.');
+      
     } else {
       console.error('Erro ao buscar tarefas:', error.message);
     }

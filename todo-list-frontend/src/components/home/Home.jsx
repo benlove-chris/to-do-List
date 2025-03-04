@@ -31,6 +31,7 @@ const Home = ({ tema, mudarTema }) => {
           setTarefas(tarefasAPI);
         } catch (error) {
           console.error("Erro ao buscar tarefas:", error);
+          handleLogout(); //deslogar usuario se não tiver o token.
         }
       } else {
         const tarefasLocal = JSON.parse(localStorage.getItem("tarefas") || "[]");
