@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
-from .views import TarefaViewSet, MyTokenObtainPairView
+from .views import TarefaViewSet, MyTokenObtainPairView, home
 from .user_views import criar_usuario
 
 # Definindo o roteador para a API de tarefas
@@ -18,5 +18,7 @@ urlpatterns = [
     path('signup/', criar_usuario, name='signup'),
 
     # Rota para tarefas
+    
     path('', include(router.urls)),  # Rotas de tarefas
+    path('home/', home, name='home'),
 ]

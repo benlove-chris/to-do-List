@@ -16,6 +16,7 @@ const Home = ({ tema, mudarTema }) => {
   const [tarefas, setTarefas] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContaIsOpen, setModalContaIsOpen] = useState(false);
+  const [modalUpdateIsOpen, setModalUpdateIsOpen] = useState(false);
 
   // Verificação de usuário autenticado
   const token = localStorage.getItem("Bearer");
@@ -129,7 +130,10 @@ const Home = ({ tema, mudarTema }) => {
   const closeModal = () => setModalIsOpen(false);
   const openModalConta = () => setModalContaIsOpen(true);
   const closeModalConta = () => setModalContaIsOpen(false);
+  const openModalUpdate = () => setModalUpdateIsOpen(true);
+  const closeModalUpdate = () => setModalUpdateIsOpen(false);
 
+  
   const isAuthenticated = !!token;
 
   return (
@@ -160,11 +164,11 @@ const Home = ({ tema, mudarTema }) => {
 
       {/* Modal Principal */}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Opções do Usuário" className="modal_x" overlayClassName="modal-overlay">
-        <button type="button" title="Conta" onClick={openModalConta}>
+        <button type="button" title="Conta" onClick={() => { openModalConta(); closeModal(); }}>
           <div className="userConta">
             <p className="userNameModal">{userName}</p>
             <p className="userEmailModal">anelusbenlove@gmail.com</p>
-          </div>
+            </div>
         </button>
         
         <hr className="modal-divider" />
@@ -180,7 +184,7 @@ const Home = ({ tema, mudarTema }) => {
           </button>
           <h2>Conta</h2>
         </div>
-        <button className="update-name-button">
+        <button className="update-name-button" onClick={()=>{closeModalConta(); openModalUpdate(); }}>
           <span>Nome</span> 
           <span className="name-label">{userName}</span>
 
@@ -196,6 +200,28 @@ const Home = ({ tema, mudarTema }) => {
             <button type="button" className="delete-account-button">Excluir conta</button>
           </p>
         </div>
+      </Modal>
+
+      
+      {/* Modal Atualizar */}
+      <Modal isOpen={modalUpdateIsOpen} onRequestClose={closeModalUpdate} contentLabel="Atualizar" className="modal_x" overlayClassName="modal-overlay" >
+        <div className="divUpdateUser">
+          <button className="back-button" onClick={closeModalUpdate}>
+            <FaArrowLeft size={20} />
+          </button>
+          <h2>Nome</h2>
+        </div>
+        <button className="update-name-button">
+          <span>Nome</span> 
+          <span className="name-label">{userName}</span>
+
+        </button>
+        
+        <hr className="modal-divider" />
+        <br />
+        {/*<button onClick={handleUpdateUser}>Atualizar</button>*/}
+  
+
       </Modal>
     </div>
   );

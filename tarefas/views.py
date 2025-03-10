@@ -9,6 +9,11 @@ from rest_framework import viewsets
 from django.contrib.auth.models import User
 from .models import Tarefa
 from .serializers import TarefaSerializer
+from django.http import JsonResponse
+
+def home(request):
+    return JsonResponse({'message': 'Backend rodando!'})
+
 
 # Custom Serializer and View for Token Authentication
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

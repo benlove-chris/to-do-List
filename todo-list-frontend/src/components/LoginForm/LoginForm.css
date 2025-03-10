@@ -1,69 +1,46 @@
 .login-container {
-  padding: 20px;
-  max-width: 400px;
-  margin: 0 auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-.login-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.login-container form {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+  
 }
 
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.login-card {
+  width: 80%;
+  max-width: 900px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  
 }
 
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.login-container button:hover {
-  background-color: #0056b3;
-}
-
-.login-container a {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.login-container a:hover {
-  text-decoration: underline;
+.login-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgb(208, 218, 219);
 }
 
 
-/* Estilo para a imagem */
 .login-image {
-  height: 100%; /* Faz a imagem ocupar 100% da altura do contêiner */
-  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
-  object-position: center; /* Centraliza a imagem */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  
 }
 
-/* Ajustes para o layout responsivo */
 @media (max-width: 768px) {
-  .login-image {
-    height: 300px; /* Altura fixa para telas menores */
+  .login-card {
+    flex-direction: column;
   }
+
+  .login-image {
+    display: none;
+  }
+
 }
+

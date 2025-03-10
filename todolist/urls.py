@@ -17,6 +17,7 @@ schema_view = get_schema_view(
 
 # Rotas principais do projeto
 urlpatterns = [
+    path('', include('tarefas.urls')),
     path('admin/', admin.site.urls),  # Rota do admin do Django
     path('api/', include('tarefas.urls')),  # Inclui as rotas do app `tarefas`
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Documentação Swagger
