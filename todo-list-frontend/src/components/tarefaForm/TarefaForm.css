@@ -23,7 +23,8 @@
     justify-content: center;
     margin: 15px 0;
     padding: 0.8rem;
-    width: 100%;
+    width: 500px;
+    max-width: 100%;
 }
 
 .tarefa-form input {
@@ -34,9 +35,9 @@
     outline: none;
     border-top-left-radius: 17px;
     border-bottom-left-radius: 17px;
-    max-width: 500px;
+    max-width: 100%;
     transition: background-color 200ms ease-in-out;
-    width: 100%;
+    width: 500px;
 }
 
 /* Input themes */

@@ -76,6 +76,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
+  max-width: 100%;
+  width: 100%;
 }
 
 /* Botão salvar */
@@ -114,9 +116,9 @@
 .tarefa-list {
   margin: 20px auto; /* Espaço acima e abaixo */
   padding: 0 10px; /* Espaçamento horizontal interno */
-  max-width: 500px; /* Limita a largura máxima da lista */
+  max-width: 100%; /* Limita a largura máxima da lista */
   text-align: center;
-  width: 900px; /* Centraliza o texto */
+  width: 500px; /* Centraliza o texto */
 }
 
 /* Estilo dos itens da tarefa */
@@ -130,7 +132,7 @@
   border-radius: 5px;
   margin: 10px auto; /* Espaçamento entre itens */
   width: 100%; /* Garante que o item ocupe toda a largura disponível */
-  max-width: 500px; /* Define uma largura máxima para manter o design responsivo */
+  max-width: 100%; /* Define uma largura máxima para manter o design responsivo */
   transition: background-color 0.3s;
 }
 
