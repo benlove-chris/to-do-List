@@ -45,7 +45,7 @@ body {
 }
 
 .light #header h1:last-of-type {
-  color: #1a150e; /* Cor do texto para o tema light */
+  color: #1a150e; /* Cor do texto [welcome] para o tema light */
 }
 
 #header {
@@ -181,6 +181,10 @@ body {
   .theme-selector {
     margin: 5px; /* Reduz o espaçamento entre os botões */
   }
+  #header{
+   
+  }
+
 }
 
 
