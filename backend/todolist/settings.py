@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -24,8 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$7gb_vo2n9r(&3#$9wn2e(8x2a1q*q+d6r0)!2*9lbz$g#i!mc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = ['192.168.0.163', '192.168.0.162', '*']
+DEBUG = False
+#ALLOWED_HOSTS = ['192.168.0.163', '192.168.0.162', '*']
+ALLOWED_HOSTS = ['backend.onrender.com']
+
 
 #CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
