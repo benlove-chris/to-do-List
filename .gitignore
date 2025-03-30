@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 *.pyo
-cerre7/
+backend/meuambiente
+backend/meuteste
 .env
 db.sqlite3
