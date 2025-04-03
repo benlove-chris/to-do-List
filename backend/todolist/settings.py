@@ -18,11 +18,13 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the ssecret key used in production secret!
 SECRET_KEY = 'django-insecure-$7gb_vo2n9r(&3#$9wn2e(8x2a1q*q+d6r0)!2*9lbz$g#i!mc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
